@@ -1,0 +1,208 @@
+/* Add additional stylesheets below
+-------------------------------------------------- */
+/*
+  Bootstrap's documentation styles
+  Special styles for presenting Bootstrap's documentation and examples
+*/
+
+
+
+/* Body and structure
+-------------------------------------------------- 
+*/
+html, body, #wrapper{
+  height: 100%;
+}
+
+/* Code in headings */
+h3 code {
+  font-size: 14px;
+  font-weight: normal;
+}
+
+body > #wrapper {
+  height: auto;
+  min-height: 100%;
+
+  padding-top: 50px;
+  padding-bottom: 120px; 
+}
+
+.btn {
+  font-family: "Microsoft YaHei",sans-serif;
+}
+
+.control-label{
+  font-family: "WenQuanYi Micro Hei","Microsoft YaHei",sans-serif;
+}
+
+th {
+  font-family: "WenQuanYi Micro Hei","Microsoft YaHei",sans-serif;
+}
+/*
+#main {
+  padding-bottom: 120px;
+}
+*/
+.clearfix:after {content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;}
+.clearfix {display: inline-block;}
+/* Hides from IE-mac \*/
+* html .clearfix { height: 1%;}
+.clearfix {display: block;}
+/* End hide from IE-mac */
+/*
+#togglebtn {
+  padding: 7.5px 10px;
+  margin-top: 6px;
+  margin-bottom: 6px;
+}*/
+/* footerss
+-------------------------------------------------- */
+
+.footers {
+  text-align: center;
+  border-top: 1px solid #e5e5e5;
+  background-color: #0e0e0e;
+  color: #777;
+
+  /*height: 120px;*/
+  position: relative;
+  padding: 40px 0;
+  margin-top: -120px; /* footer高度的负值 */
+  clear:both;
+}
+.footers p {
+  margin-bottom: 0;
+  
+}
+.footers a{
+  color: #777;
+}
+.footers-links {
+  margin: 10px 0;
+}
+.footers-links li {
+  display: inline;
+  padding: 0 2px;
+}
+.footers-links li:first-child {
+  padding-left: 0;
+}
+
+/* Tweak navbar brand link to be super sleek
+-------------------------------------------------- */
+
+.navbar .navbar-text{
+  /*font-size: 15px;*/
+  font-family: "Microsoft YaHei",sans-serif;
+}
+
+/* Change the docs' brand */
+.navbar-inverse .navbar-brand {
+  padding-right: 0;
+  padding-left: 0;
+  margin-left: 20px;
+  margin-right: 20px;
+  float: left;
+  font-family: "Microsoft YaHei",sans-serif;
+  font-weight: bold;
+  font-size: 20px;
+  color: #CC6633;
+  text-shadow: 0 1px 0 rgba(255,255,255,.1), 0 0 30px rgba(255,255,255,.125);
+  -webkit-transition: all .2s linear;
+     -moz-transition: all .2s linear;
+          transition: all .2s linear;
+}
+.navbar-inverse .navbar-brand:hover {
+  text-decoration: none;
+  text-shadow: 0 1px 0 rgba(255,255,255,.1), 0 0 30px rgba(255,255,255,.4);
+}
+
+#sizedescr {
+  font-family: "WenQuanYi Micro Hei","Microsoft YaHei",sans-serif;
+  padding-top: 7px;
+}
+
+.header--fixed{position:fixed;z-index:10;right:0;left:0;top:0}
+/*
+.header__link{color:#fff;text-decoration:none;border:0}
+.header__link:focus{outline:0;background-color:rgba(78,205,196,0.1)}
+.header__link:hover .icon{color:#4ecdc4}
+@media print{
+  *{background:transparent!important;color:#000!important;box-shadow:none!important;text-shadow:none!important}
+  a,a:visited{text-decoration:underline}
+  a[href]:after{content:" (" attr(href) ")"}
+  abbr[title]:after{content:" (" attr(title) ")"}
+  .ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}
+  pre,blockquote{border:1px solid #999;page-break-inside:avoid}
+  thead{display:table-header-group}
+  tr,img{page-break-inside:avoid}
+  img{max-width:100%!important}
+  @page{margin:.5cm}
+  p,h2,h3{orphans:3;widows:3}
+  h2,h3{page-break-after:avoid}
+  .hide-from-print{display:none}
+}
+
+.animated {
+  -webkit-animation-duration:.5s;
+  -moz-animation-duration:.5s;
+  -o-animation-duration:.5s;
+  animation-duration:.5s;
+  -webkit-animation-fill-mode:both;
+  -moz-animation-fill-mode:both;
+  -o-animation-fill-mode:both;
+  animation-fill-mode:both
+}
+
+@-webkit-keyframes slideDown {
+  0%{-webkit-transform:translateY(-4em)}
+  100%{-webkit-transform:translateY(0)}
+}
+@-moz-keyframes slideDown {
+  0%{-moz-transform:translateY(-4em)}
+  100%{-moz-transform:translateY(0)}
+}
+@-o-keyframes slideDown {
+  0%{-o-transform:translateY(-4em)}
+  100%{-o-transform:translateY(0)}
+}
+@keyframes slideDown {
+  0%{transform:translateY(-4em)}
+  100%{transform:translateY(0)}
+}
+.animated.slideDown {
+  -webkit-animation-name:slideDown;
+  -moz-animation-name:slideDown;
+  -o-animation-name:slideDown;
+  animation-name:slideDown
+}
+
+@-webkit-keyframes slideUp {
+  0%{-webkit-transform:translateY(0)}
+  100%{-webkit-transform:translateY(-4em)}
+}
+@-moz-keyframes slideUp {
+  0%{-moz-transform:translateY(0)}
+  100%{-moz-transform:translateY(-4em)}
+}
+@-o-keyframes slideUp {
+  0%{-o-transform:translateY(0)}
+  100%{-o-transform:translateY(-4em)}
+}
+@keyframes slideUp {
+  0%{transform:translateY(0)}
+  100%{transform:translateY(-4em)}
+}
+.animated.slideUp {
+  -webkit-animation-name:slideUp;
+  -moz-animation-name:slideUp;
+  -o-animation-name:slideUp;
+  animation-name:slideUp
+}
+
+*/
