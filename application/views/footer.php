@@ -2,58 +2,14 @@
 
 
 <footer class="footers">
-	<!--
-	<div class="container">
-		<div class="row">
-			<div class="col-xs-12">
-				<div></div>
-			</div>
-		</div>
-	</div>
-	-->
 	<p class="text-center text-muted">©<?=date('Y')?> FELIX</p>
 	<p class="text-center text-muted">联系我&nbsp;:&nbsp;<a href="mailto:fz0420@hotmail.com" class="text-muted">fz0420@hotmail.com</a></p>
 </footer>
-<!--
-<footer>
-	<ul class="list-unstyled"><li class="text-center text-muted">©<?=date('Y')?> FELIX</li></ul>
-	<ul class="list-unstyled"><li class="text-center text-muted">联系我&nbsp;:&nbsp;<a href="mailto:fz0420@hotmail.com">fz0420@hotmail.com</li></ul>
-</footer>
--->
+
 <script src="<?=base_url('js/jquery.min.js')?>"></script>
 <script src="<?=base_url('js/bootstrap.min.js')?>"></script>
 <script src="<?=base_url('js/headroom.min.js')?>"></script>
 <script src="<?=base_url('js/jQuery.headroom.min.js')?>"></script>
-<!--
-<script type="text/javascript">
-(function() {
-    var header = new Headroom(document.querySelector("#header0"), {
-        tolerance: 10,
-        offset : 0,
-        classes: {
-          initial: "animated",
-          pinned: "bounceInDown",
-          unpinned: "bounceOutUp"
-        }
-    });
-    header.init();
-}());
-</script>-->
-<script type="text/javascript">
-jQuery(function($) {
-  $(document).ready(function(){
-    $("#header0").headroom({
-  		"tolerance": 0,
-  		"offset": 0,
-  		"classes": {
-    		"initial": "fadeInDown",//"animated",
-    		"pinned": "fadeInDown",//"slideInDown",
-    		"unpinned": "fadeOutUp"//"slideOutUp"
-  		}
-	});
-   });
-});
-</script>
 
 <script type="text/javascript">
 var shlfcnt=0;
@@ -90,10 +46,11 @@ function removeshelf(i){
 
 <script type="text/javascript">
 $(document).ready(function(){
-	$(".contactclass").click(function(){
+  $(".contactclass").click(function(){
 		$("#contactbtn").text($(this).text());
 	});
 });
 </script>
+
 </body>
 </html>

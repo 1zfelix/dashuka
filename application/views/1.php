@@ -4,6 +4,14 @@
 <div class="row" style="padding: 40px 0"><!---->
   <form class="form-horizontal col-lg-8 col-xs-6" action="<?=base_url('index.php/go/bookstorage')?>" method="post">
     <div class="form-group">
+        <label for="isbn" class="col-lg-3 control-label">ISBN</label>
+            <div class="col-lg-8">
+                <input type="text" placeholder="ISBN" class="form-control" name="isbn" id="isbn">
+                <button type="button" class="btn btn-success" style="text-align:center" id="fetchisbn">获取书籍信息</button>&nbsp;&nbsp;
+            </div>
+    </div>
+
+    <div class="form-group">
         <label for="name" class="col-lg-3 control-label">书名</label>
             <div class="col-lg-8">
                 <input type="text" placeholder="书名" class="form-control" name="name" id="name">
@@ -93,5 +101,28 @@
         </div>
 </div><!--  -->
 </div>
+<script type='text/javascript'>
+$(document).ready(function() {
+  $('#fetchisbn').click(function() {
+    if ($('#isbn').val().length == 10 || $('#isbn').val().length == 13) {
+      $.get('<?=base_url('index.php/ajax/isbn')?>'+'/'+$('#isbn').val(),function(data) {
+        console.log('<?=base_url('index.php/ajax/isbn')?>'+'/'+$('#isbn').val());
+        data = JSON.parse(data);
+        if (data['msg'] == 'book_not_found') {
+          alert('book not found');
+        } else {
+          bookname = data['title'];
+          author = data['author'];
+          press = data['publisher'];
+          $('#name').val(bookname);
+          $('#authors').val(author);
+          $('#press').val(press);
+
+        }
+      });
+    }
+  });
+});
+</script>
 
 <?php $this->load->view('footer'); ?>

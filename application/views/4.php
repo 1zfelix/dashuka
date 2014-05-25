@@ -7,7 +7,7 @@
   <p><a class="btn btn-primary btn-lg" role="button">Learn more</a></p>
 </div>
 <div class="jumbotron">
-  <h1>置顶</h1>
+  <h1>置顶卖书</h1>
   <p>...</p>
   <p><a class="btn btn-primary btn-lg" role="button">Learn more</a></p>
 </div>

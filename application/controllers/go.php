@@ -45,6 +45,9 @@ class GO extends CI_Controller {
 	{
 		
 	}
+        public function ajax() 
+        {
+        }
 
 }
 
