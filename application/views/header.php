@@ -47,7 +47,7 @@
             -->
           </button>
           <a class="navbar-brand" href="<?=base_url('index.php')?>">毕业书摊</a>
-          <p class="navbar-text navbar-right"><a href="<?=base_url('index.php/go/welcome')?>" class="navbar-link">欢迎</a></p>
+          <!-- <p class="navbar-text navbar-right"><a href="<?=base_url('index.php/go/welcome')?>" class="navbar-link">欢迎</a></p> -->
         </div>
 
         <!--<nav class="navbar-collapse collapse navbar-right" id="register">

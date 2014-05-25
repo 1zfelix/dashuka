@@ -14,8 +14,7 @@
 | path to your installation.
 |
 */
-//$config['base_url']	= 'http://localhost/bookstall/';
-$config['base_url']	= 'http://www.bookstall.com';
+$config['base_url']	= 'http://www.dashuka.com';
 
 /*
 |--------------------------------------------------------------------------
