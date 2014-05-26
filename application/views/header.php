@@ -59,7 +59,7 @@
                         <span class="sr-only">Toggle navigation</span>
                         <span class="navbar-text">登录</span>
                     </button>
-                    <a class="navbar-brand" href="<?=base_url('index.php')?>">毕业书摊</a>
+                    <a class="navbar-brand" href="<?=base_url('index.php')?>">5145</a>
                 </div>
 
 
