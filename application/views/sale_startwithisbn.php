@@ -1,6 +1,6 @@
 <?php $this->load->view('header'); ?>
 
-<div class="container" style="padding: 0">
+<div class="container">
     <div class="row" style="padding: 40px 0">
         <form class="bkinfo form-horizontal col-lg-12 col-xs-12" action="<?=base_url('index.php/go/bookstorage')?>" method="post">
             <div class="form-group">
@@ -19,7 +19,7 @@
                     <button type="button" class="btn btn-success" style="text-align:center" id="addmanually">手动添加</button>
                 </div>
                 <div class="alert alert-success" id="succisbn" style="display:none">
-                    获取成功,您可以:&nbsp;
+                    获取成功,请完善一下信息，或者您可以:&nbsp;
                     <button type="button" class="searchagain btn btn-success btn-sm" style="text-align:center">重新搜索</button>&nbsp;&nbsp;  
                 </div>
                 <div class="alert alert-default" id="runisbn" style="display:none">

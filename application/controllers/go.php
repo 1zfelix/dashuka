@@ -19,7 +19,8 @@ class GO extends CI_Controller {
 	public function bookrec()
 	{
 		// $this->load->view('1');
-		$this->load->view('sale_startwithisbn');
+		// $this->load->view('sale_startwithisbn');
+		$this->load->view('sale_quickstart');
 	}
 	public function booklist($page,$perSize)
 	{

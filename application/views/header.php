@@ -28,6 +28,7 @@
 <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.min.js"></script>
 <script src="http://cdn.bootcss.com/respond.js/1.3.0/respond.min.js"></script>
 <![endif]-->
+<!-- 
     <script type="text/javascript">
     $(document).ready(function() {
         $("#header0").headroom({
@@ -41,7 +42,7 @@
         });
     });
     </script>
-
+ -->
     <title>
         <?php if(isset($title)){ echo $title. "-";}?>Dashuka</title>
 
@@ -50,7 +51,8 @@
 <body>
     <div id="wrapper" class="clearfix">
 
-        <div id="header0" class="navbar navbar-inverse navbar-fixed-top header--fixed animated" role="navigation">
+        <!-- <div id="header0" class="navbar navbar-inverse navbar-fixed-top header--fixed animated" role="navigation"> -->
+        <div id="header0" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#login" style="padding: 7.5px 10px; margin-top: 6px; margin-bottom: 6px;">
