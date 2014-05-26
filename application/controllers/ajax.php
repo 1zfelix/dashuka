@@ -30,7 +30,17 @@ class AJAX extends CI_Controller {
 
   public function isbn($d) {
     $url = 'http://api.douban.com/v2/book/isbn/'.$d;
-    $resp = file_get_contents($url);
+    $resp = file_get_contents(
+      $url,
+      false,
+      stream_context_create(
+        array(
+            'http' => array(
+                'ignore_errors' => true
+            )
+        )
+      )
+    );
     echo($resp);
   }
 }

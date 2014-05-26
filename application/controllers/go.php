@@ -18,7 +18,8 @@ class GO extends CI_Controller {
 	}
 	public function bookrec()
 	{
-		$this->load->view('1');
+		// $this->load->view('1');
+		$this->load->view('sale_startwithisbn');
 	}
 	public function booklist($page,$perSize)
 	{
@@ -45,9 +46,9 @@ class GO extends CI_Controller {
 	{
 		
 	}
-        public function ajax() 
-        {
-        }
+    public function ajax() 
+    {
+    }
 
 }
 

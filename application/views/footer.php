@@ -6,11 +6,6 @@
 	<p class="text-center text-muted">联系我&nbsp;:&nbsp;<a href="mailto:fz0420@hotmail.com" class="text-muted">fz0420@hotmail.com</a></p>
 </footer>
 
-<script src="<?=base_url('js/jquery.min.js')?>"></script>
-<script src="<?=base_url('js/bootstrap.min.js')?>"></script>
-<script src="<?=base_url('js/headroom.min.js')?>"></script>
-<script src="<?=base_url('js/jQuery.headroom.min.js')?>"></script>
-
 <script type="text/javascript">
 var shlfcnt=0;
 var shlfnum=0;
