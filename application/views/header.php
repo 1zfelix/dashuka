@@ -64,7 +64,7 @@
 
 
                 <nav class="navbar-collapse collapse" id="login">
-                    <form action="<?=base_url('index.php/go/login')?>" class="navbar-form navbar-right" role="form">
+                    <form action="<?=base_url('index.php/go/login')?>" class="navbar-form navbar-right" role="form" method="post">
                         <div class="form-group">
                             <input type="text" placeholder="用户名" class="form-control" name="username">
                         </div>

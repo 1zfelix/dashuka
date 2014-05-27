@@ -26,7 +26,10 @@ class GO extends CI_Controller {
 	{
 		$this->load->model('BookModel');
 		$pageNum=$this->BookModel->countPage($perSize);
-		$data['result']=$this->BookModel->readBook($page,$perSize);
+		
+		$resp=$this->BookModel->readBook($page,$perSize);
+
+		$data['result']=$resp;
 		$data['pageNum']=$pageNum;
 		$data['currPage']=$page;
 		$data['perSize']=$perSize;

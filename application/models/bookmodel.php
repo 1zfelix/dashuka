@@ -1,8 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class BookModel extends CI_Model {
 
-    //const perSize=10;
-
     function __construct()
     {
         parent::__construct();
@@ -21,6 +19,8 @@ class BookModel extends CI_Model {
                'contact'=> $_POST['contact'] ,
                'place' => $_POST['place'] ,
                'price' => $_POST['price'] ,
+               'pubdate' => $_POST['pubdate'] ,
+               'imgurl' => $_POST['imgurl']
             );
         $this->db->insert('book', $info);
         $data['row']=$info;
@@ -30,7 +30,6 @@ class BookModel extends CI_Model {
 
     public function readBook($page,$perSize)
     {
-        //$perSize=self::perSize;
         $beg=($page-1)*$perSize;
         $query=$this->db->query("SELECT * FROM book LIMIT $beg,$perSize");
         return $query->result();
@@ -45,7 +44,6 @@ class BookModel extends CI_Model {
         $query=mysql_query("SELECT count(*) FROM book");
         $ret=mysql_fetch_array($query);
         $totalSize=intval($ret[0]);
-        //$perSize=self::perSize;
         $pageNum=ceil($totalSize/$perSize);
         return $pageNum;
     }

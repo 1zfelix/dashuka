@@ -87,6 +87,7 @@ $(document).ready(function() {
                     $('.qf_author').val(author);
                     $('.qf_press').val(press);
                     $('.qf_pub').val(pubdate);
+                    $('.qf_imgurl').val(data['images']['small']);
                     
                     $('#qs_bkname').text(bookname);
                     $('#qs_bkauthor').text(author);

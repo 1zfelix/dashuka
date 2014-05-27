@@ -14,7 +14,7 @@
         <div class="hi form-group" style="display:none">
         <label for="press" class="col-lg-3 control-label">版本</label>
         <div class="col-lg-8">
-            <input type="text" placeholder="版本" class="form-control qf_pub" name="edition">
+            <input type="text" placeholder="版本" class="form-control qf_pub" name="pubdate">
         </div>
     </div>
     <div class="hi form-group" style="display:none">
@@ -54,4 +54,5 @@
             <input type="text" placeholder="价格" class="form-control" name="price" id="price">
         </div>
     </div>
+    <input type="text" class="form-control  qf_imgurl" name="imgurl" id="imgurl">
 </form>
