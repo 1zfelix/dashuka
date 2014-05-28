@@ -56,7 +56,7 @@
     </div>
     
     <div class="info manually row" style="margin: 0 50px; padding-bottom: 40px; display: none">
-        <?php $this->load->view('sale_bookinfo_quick');?>
+        <?php $this->load->view('sale_bookinfo_manu');?>
     </div>
     
     <div class="info quick row" style="margin: 0 50px; padding-bottom: 40px; display: none" id="quickFormBtnSet">
@@ -155,16 +155,11 @@ $(document).ready(function() {
     });
 
     $('.editmanually').click(function() {
-        $('#bk').addClass('manually');
-        $('#quickFormBtnSet').removeClass('quick');
-        $('#quickFormBtnSet').addClass('manually');
-        $('#quickFormSubmitBtn').removeClass('quick');
-        $('#quickFormSubmitBtn').addClass('manually');
         $('#editManuBtn').hide();
         $('#errorisbn').hide();
-        $('.quick').hide();
-        $('.hi').show();
-        $('.info.manually').show();
+        $('.info.quick .ui.two').hide();
+        $('#bk .hi').show();
+        $('#bk').show();
     });
 
     $('.quick#quickFormSubmitBtn').click(function() {
