@@ -1,16 +1,19 @@
 <?php $this->load->view('header'); ?>
-<div class="ui right demo sidebar menu">
-    </div>
+   
+<?php $this->load->view('sale_sidebar');?>
+
 <div class="container">
-    
-    <div class="quickisbn row" style="padding: 40px 0">
+
+    <div class="quickisbn row" style="margin: 0 50px; padding: 40px 0">
         <form class="form-horizontal col-lg-12 col-xs-12" action="">
-            <div class="isbn form-group">
+            
+            <div class="form-group isbn">
                 <label for="isbn" class="col-lg-2 control-label">ISBN</label>
                 <div class="col-lg-8">
-                    <input type="text" placeholder="ISBN" class="form-control" name="isbn" id="isbn">
+                    <input type="text" placeholder="ISBN" class="form-control FormInputItem" name="isbn" id="isbn">
                 </div>
             </div>
+            
             <div class="form-group">
                 <p style="text-align:center" class="fetchisbn">
                     <button type="button" class="btn btn-success" style="text-align:center" id="fetchisbn">快速添加书籍信息</button>&nbsp;&nbsp;
@@ -34,13 +37,15 @@
                     <button type="button" class="searchagain btn btn-success btn-sm" style="text-align:center">快速搜索</button>&nbsp;&nbsp;  
                 </div>
             </div>
+
         </form>
     </div>
-    <div class="info quick row" style="padding-bottom: 40px; display: none">
+    
+    <div class="info quick row" style="margin: 0 50px; padding-bottom: 40px; display: none">
         <div class="ui two column middle aligned relaxed grid basic segment">
             <div class="column">
             <!-- <div class="col-lg-6 col-xs-12"></div> -->
-                <?php $this->load->view('sale_bookinfo_show');?>
+                <?php $this->load->view('sale_bookinfo_show_table');?>
             </div>
             <div class="ui vertical divider"></div>
             <div class="aligned column">
@@ -49,15 +54,18 @@
             </div>
         </div>
     </div>
-    <div class="info manually row" style="padding-bottom: 40px; display: none">
+    
+    <div class="info manually row" style="margin: 0 50px; padding-bottom: 40px; display: none">
         <?php $this->load->view('sale_bookinfo_quick');?>
     </div>
-    <div id="qfbtn" class="info quick row" style="padding-bottom: 40px; display: none">
+    
+    <div class="info quick row" style="margin: 0 50px; padding-bottom: 40px; display: none" id="quickFormBtnSet">
         <p style="text-align:center">
-            <button type="button" class="quick btn btn-success" style="text-align:center" id="quickform" data-variation=".right">提交</button>&nbsp;&nbsp;
-            <button type="button" class="editmanually btn btn-default" style="text-align:center" id="editbtn">修改</button>
+            <button type="button" class="quick btn btn-success" id="quickFormSubmitBtn">提交</button>&nbsp;&nbsp;
+            <button type="button" class="editmanually btn btn-default" id="editManuBtn">修改</button>
         </p>
     </div>
+
 </div>
 
 <script type='text/javascript'>
@@ -95,14 +103,14 @@ $(document).ready(function() {
                     $('#qs_bkauthor').text(author);
                     $('#qs_bkpress').text(press);
                     $('#qs_bkpub').text(pubdate);
-                    $('#qs_bkimg').attr('src',data['images']['small']);
+                    $('#qs_bkimg').attr('src',data['images']['medium']);
                     $('#qs_bkisbn').text(data['isbn10']+', '+data['isbn13']);
                     
-                    $('#quickform').removeClass('manually');
-                    $('#quickform').addClass('quick');
-                    $('#qfbtn').removeClass('manually');
-                    $('#qfbtn').addClass('quick');
-                    $('#editbtn').show();
+                    $('#quickFormSubmitBtn').removeClass('manually');
+                    $('#quickFormSubmitBtn').addClass('quick');
+                    $('#quickFormBtnSet').removeClass('manually');
+                    $('#quickFormBtnSet').addClass('quick');
+                    $('#editManuBtn').show();
                     $('.hi').hide();
                     $('.info.quick').show();
                 }
@@ -135,11 +143,11 @@ $(document).ready(function() {
         $('#errorisbn').hide();
         
         $('#bk').addClass('manually');
-        $('#qfbtn').removeClass('quick');
-        $('#qfbtn').addClass('manually');
-        $('#quickform').removeClass('quick');
-        $('#quickform').addClass('manually');
-        $('#editbtn').hide();
+        $('#quickFormBtnSet').removeClass('quick');
+        $('#quickFormBtnSet').addClass('manually');
+        $('#quickFormSubmitBtn').removeClass('quick');
+        $('#quickFormSubmitBtn').addClass('manually');
+        $('#editManuBtn').hide();
         
         $('.quick').hide();
         $('.hi').show();
@@ -148,70 +156,83 @@ $(document).ready(function() {
 
     $('.editmanually').click(function() {
         $('#bk').addClass('manually');
-        $('#qfbtn').removeClass('quick');
-        $('#qfbtn').addClass('manually');
-        $('#quickform').removeClass('quick');
-        $('#quickform').addClass('manually');
-        $('#editbtn').hide();
+        $('#quickFormBtnSet').removeClass('quick');
+        $('#quickFormBtnSet').addClass('manually');
+        $('#quickFormSubmitBtn').removeClass('quick');
+        $('#quickFormSubmitBtn').addClass('manually');
+        $('#editManuBtn').hide();
         $('#errorisbn').hide();
         $('.quick').hide();
         $('.hi').show();
         $('.info.manually').show();
     });
 
-    $('.quick#quickform').click(function() {
+    $('.quick#quickFormSubmitBtn').click(function() {
         
     });
-    $('.manually#quickform').click(function() {
+    $('.manually#quickFormSubmitBtn').click(function() {
 
     });
 
+    $('.demo.sidebar').append('<form style="display:none" class="TotalBookInfo"><input type="text" class="SidebarBookInfo" style="display:none"></input></form>');
+
+    $('#quickFormSubmitBtn').click(function() {
+        $('.demo.sidebar')
+          .sidebar({
+            overlay: false
+          })
+          .sidebar('show')
+        ;
+
+        var singleBookAttrCnt = $('.info.quick .FormInputItem').size();
+        var singleBookInfo = '{' + $('#isbn').attr('name') + ':"' + $('#isbn').val() + '"';
+        var i = 1;
+        
+        $('.info.quick .FormInputItem').each(function(){
+            singleBookInfo += ',' + $(this).attr('name') + ':"' + $(this).val() + '"';
+            if (i == singleBookAttrCnt) {
+                singleBookInfo += '}';
+            }
+            i++;
+        })
+        
+        var tempBookInfo = $('form input.SidebarBookInfo').val();
+        if (tempBookInfo == "") {
+            $('form input.SidebarBookInfo').val(singleBookInfo);
+        }
+        else {
+            $('form input.SidebarBookInfo').val(tempBookInfo + ',' + singleBookInfo);
+        }
+
+        console.log($('form input.SidebarBookInfo').val());
+        
+        $('.demo.sidebar .SidebarEmptyInfo').hide();
+
+        var menuitem = '<div class="item"></div>';
+
+        $('.demo.sidebar .header.item').after(
+            $('<div class="item"></div>').append(
+                $('<b></b>').append(
+                    $('.qf_name').val()
+                ),
+                $('<div class="menu"></div>').append(
+                    $(menuitem).append(
+                        $('.qf_author').val()
+                    ),
+                    $(menuitem).append(
+                        $('.qf_press').val()
+                    ),
+                    $(menuitem).append(
+                        $('.qf_pub').val()
+                    ),
+                    $(menuitem).append(
+                        $('.qf_isbn').val()
+                    )
+                )                
+            )
+        );
+    });
 });
 </script>
 
-<script type="text/javascript">
-semantic.sidebar = {};
-
-// ready event
-semantic.sidebar.ready = function() {
-
-  // selector cache
-  var
-    // alias
-    handler
-  ;
-
-  $('.variation .button')
-    .on('click', function() {
-      $(this)
-        .toggleClass('active')
-        .siblings()
-        .removeClass('active')
-      ;
-      $('.sidebar')
-        .filter($(this).data('variation') ).first()
-        .sidebar('toggle')
-      ;
-    })
-  ;
-  $('.styled.sidebar').first()
-    .sidebar('attach events', '.styled.example .button')
-  ;
-
-  $('.floating.sidebar').first()
-    .sidebar('attach events', '.floating.example .button')
-  ;
-
-
-};
-
-
-// attach ready event
-$(document)
-  .ready(semantic.sidebar.ready)
-;
-</script>
-<!-- 
- <script type="text/javascript" src="<?=base_url('js/t.js')?>"></script>
- -->
-<?php $this->load->view('footer'); ?>
+<?php $this->load->view('footer_empty'); ?>

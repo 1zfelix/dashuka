@@ -1,20 +1,3 @@
-<!-- 
-<li class="list-group-item">
-	<div class="row">
-	<div class="col-lg-1">
-		<a href="#" target="_blank">
-			<img src="<?=$row->imgurl?>">
-		</a>
-	</div>
-	<div class="col-lg-11">
-		<ul>
-			<li>[<?=$row->type?>]&nbsp;<i><?=$row->name?></i>&nbsp;<?=$row->price?>元</li>
-			<li><?=$row->authors?>作&nbsp;<?=$row->press?>&nbsp;版次:<?=$row->pubdate?></li>
-			<li><?=$row->old?></li>
-		</ul>
-	</div></div>
-</li> 
--->
 	<?php
 		$imgurl = base_url('\images\bk.jpg');
 		if (isset($row->imgurl)) {
@@ -35,8 +18,26 @@
 	    <hr style="margin-top: -10px; margin-bottom: 2px">
 	</li>
 
+<!-- 
+<li class="list-group-item">
+	<div class="row">
+	<div class="col-lg-1">
+		<a href="#" target="_blank">
+			<img src="<?=$row->imgurl?>">
+		</a>
+	</div>
+	<div class="col-lg-11">
+		<ul>
+			<li>[<?=$row->type?>]&nbsp;<i><?=$row->name?></i>&nbsp;<?=$row->price?>元</li>
+			<li><?=$row->authors?>作&nbsp;<?=$row->press?>&nbsp;版次:<?=$row->pubdate?></li>
+			<li><?=$row->old?></li>
+		</ul>
+	</div></div>
+</li> 
+-->
 
-<!--   	<div class="item">
+<!--   	
+	<div class="item">
     	<img class="ui small image" src="<?=$row->imgurl?>">
     	<div class="content">
       		<div class="header">[<?=$row->type?>]&nbsp;<i><?=$row->name?></i>&nbsp;<?=$row->price?>元</div>
@@ -45,4 +46,5 @@
       			<div class="item">成色:<?=$row->old?></div>
       		</div>
     	</div>
-    </div> -->
+    </div> 
+-->
