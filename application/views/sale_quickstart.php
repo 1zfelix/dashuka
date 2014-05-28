@@ -1,6 +1,8 @@
 <?php $this->load->view('header'); ?>
-
+<div class="ui right demo sidebar menu">
+    </div>
 <div class="container">
+    
     <div class="quickisbn row" style="padding: 40px 0">
         <form class="form-horizontal col-lg-12 col-xs-12" action="">
             <div class="isbn form-group">
@@ -52,7 +54,7 @@
     </div>
     <div id="qfbtn" class="info quick row" style="padding-bottom: 40px; display: none">
         <p style="text-align:center">
-            <button type="button" class="quick btn btn-success" style="text-align:center" id="quickform">提交</button>&nbsp;&nbsp;
+            <button type="button" class="quick btn btn-success" style="text-align:center" id="quickform" data-variation=".right">提交</button>&nbsp;&nbsp;
             <button type="button" class="editmanually btn btn-default" style="text-align:center" id="editbtn">修改</button>
         </p>
     </div>
@@ -87,13 +89,13 @@ $(document).ready(function() {
                     $('.qf_author').val(author);
                     $('.qf_press').val(press);
                     $('.qf_pub').val(pubdate);
-                    $('.qf_imgurl').val(data['images']['small']);
+                    $('.qf_imgurl').val(data['images']['large']);
                     
                     $('#qs_bkname').text(bookname);
                     $('#qs_bkauthor').text(author);
                     $('#qs_bkpress').text(press);
                     $('#qs_bkpub').text(pubdate);
-                    $('#qs_bkimg').attr('src',data['images']['large']);
+                    $('#qs_bkimg').attr('src',data['images']['small']);
                     $('#qs_bkisbn').text(data['isbn10']+', '+data['isbn13']);
                     
                     $('#quickform').removeClass('manually');
@@ -161,9 +163,53 @@ $(document).ready(function() {
         
     });
     $('.manually#quickform').click(function() {
-        
+
     });
+
 });
+</script>
+
+<script type="text/javascript">
+semantic.sidebar = {};
+
+// ready event
+semantic.sidebar.ready = function() {
+
+  // selector cache
+  var
+    // alias
+    handler
+  ;
+
+  $('.variation .button')
+    .on('click', function() {
+      $(this)
+        .toggleClass('active')
+        .siblings()
+        .removeClass('active')
+      ;
+      $('.sidebar')
+        .filter($(this).data('variation') ).first()
+        .sidebar('toggle')
+      ;
+    })
+  ;
+  $('.styled.sidebar').first()
+    .sidebar('attach events', '.styled.example .button')
+  ;
+
+  $('.floating.sidebar').first()
+    .sidebar('attach events', '.floating.example .button')
+  ;
+
+
+};
+
+
+// attach ready event
+$(document)
+  .ready(semantic.sidebar.ready)
+;
 </script>
 <!-- 
  <script type="text/javascript" src="<?=base_url('js/t.js')?>"></script>

@@ -54,5 +54,5 @@
             <input type="text" placeholder="价格" class="form-control" name="price" id="price">
         </div>
     </div>
-    <input type="text" class="form-control  qf_imgurl" name="imgurl" id="imgurl">
+    <input type="text" class="form-control  qf_imgurl" name="imgurl" id="imgurl" style="display:none">
 </form>
