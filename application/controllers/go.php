@@ -18,23 +18,20 @@ class GO extends CI_Controller {
 	}
 	public function bookrec()
 	{
-		// $this->load->view('1');
-		// $this->load->view('sale_startwithisbn');
-		$this->load->view('sale_quickstart');
+		$this->load->view('sale_main');
 	}
 	public function booklist($page,$perSize)
 	{
 		$this->load->model('BookModel');
 		$pageNum=$this->BookModel->countPage($perSize);
-		
 		$resp=$this->BookModel->readBook($page,$perSize);
 
 		$data['result']=$resp;
 		$data['pageNum']=$pageNum;
 		$data['currPage']=$page;
 		$data['perSize']=$perSize;
-		//$this->load->view('2_1',$data);
-		$this->load->view('2',$data);
+
+		$this->load->view('buy_main',$data);
 	}
 	public function bookstorage()
 	{
@@ -52,6 +49,7 @@ class GO extends CI_Controller {
 	}
     public function ajax() 
     {
+    	
     }
 
 }

@@ -3,6 +3,9 @@
         <div class="header item">已添加的书</div>
         <div class="item SidebarEmptyInfo">请添加一本书...</div>
         <div class="ui black fluid button" id="allBookSubmitBtn">Submit</div>
+        <form style="display:none" class="TotalBookInfo">
+            <input type="text" class="SidebarBookInfo" style="display:none"></input>
+        </form>
     </div>
 
     <div class="ui black huge launch right attached button" style="width: 50px; position: fixed;">
