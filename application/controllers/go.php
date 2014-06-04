@@ -67,6 +67,14 @@ class GO extends CI_Controller {
    		$data['saletype']='user';
    		$this->load->view('sale_userinfo_succ',$data);
    	}
+
+   	public function showbook($id)
+   	{
+   		$this->load->model('BookModel');
+   		$resp=$this->BookModel->findByProperty('id',$id);
+   		$data['row']=$resp;
+   		$this->load->view('buy_showbook',$data);
+   	}
 }
 
 /* End of file go.php */

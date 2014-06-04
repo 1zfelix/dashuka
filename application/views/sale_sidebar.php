@@ -4,8 +4,11 @@
         <div class="item SidebarEmptyInfo">请添加一本书...</div>
         <form class="TotalBookInfo" action="<?=base_url('index.php\go\user')?>" method="post">
             <input type="text" class="SidebarBookInfo" style="display:none" name="jsoninfo"></input>
-            <button class="ui black fluid button" id="allBookSubmitBtn" type="submit">Submit</button>
-            <button class="ui black fluid button" id="returnSubmitBtn" style="display:none" type="button">返回上一步</button>
+            <hr>
+            <div style="padding: 0 20px">
+                <button class="ui black fluid button huge" id="allBookSubmitBtn" type="submit">Submit</button>
+                <button class="ui black fluid button huge" id="returnSubmitBtn" style="display:none" type="button">返回上一步</button>
+            </div>
         </form>
     </div>
 

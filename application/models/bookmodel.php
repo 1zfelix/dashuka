@@ -22,6 +22,7 @@ class BookModel extends CI_Model {
                'pubdate' => $_POST['pubdate'] ,
                'imgurl' => $_POST['imgurl']
             );
+        // $code = 
         $this->db->insert('book', $info);
         $data['row']=$info;
         $data['err']="";
@@ -46,5 +47,16 @@ class BookModel extends CI_Model {
         $totalSize=intval($ret[0]);
         $pageNum=ceil($totalSize/$perSize);
         return $pageNum;
+    }
+
+    public function findBookById($id)
+    {
+        return findByProperty('id',$id);
+    }
+
+    public function findByProperty($name,$val)
+    {
+        $query=$this->db->query("SELECT * FROM book WHERE ".$name."=".$val);
+        return $query->result();
     }
 }

@@ -1,15 +1,24 @@
 	<?php
-		$imgurl = base_url('\images\bk.jpg');
+		$imgurl = base_url('/images/bk.jpg');
 		if (isset($row->imgurl)) {
 			$imgurl = $row->imgurl;
 		}
+		$bkurl = base_url('/index.php/go/showbook/'.$row->id);
 	?>
 	<li class="media" style="margin:0">
-	    <a class="pull-left" href="#">
+	    <a class="pull-left" href="<?=$bkurl?>">
 	      <img class="media-object" src="<?=$imgurl?>" alt="" style="width: 50px; height: 70px;">
 	    </a>
 	    <div class="media-body">
-	      	<h4 class="media-heading">[<?=$row->type?>]&nbsp;&nbsp;<i><?=$row->name?></i>&nbsp;&nbsp;<?=$row->price?>元</h4>
+	    	<div style="float:right; margin:3px">
+	    		<span><h8><?=$row->price?>元&nbsp;&nbsp;</h8></span>
+	    		<a href="#" class="btn-sm btn-success">购买</a>
+	    	</div>
+	      	<div>
+		      	<h4 class="media-heading">
+		      		<a href="<?=$bkurl?>">[<?=$row->type?>]&nbsp;&nbsp;<i><?=$row->name?></i>&nbsp;&nbsp;</a>
+		      	</h4>
+	      	</div>
       		<div class="list-group">
 	      		<p class="list-group-item-text"><?=$row->authors?>&nbsp;著&nbsp;&nbsp;<?=$row->press?>&nbsp;&nbsp;版次:&nbsp;<?=$row->pubdate?></p>
 	      		<p class="list-group-item-text">成色:&nbsp;<?=$row->old?></p>
