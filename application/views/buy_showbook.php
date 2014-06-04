@@ -15,12 +15,12 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                     <div>
-                      <h3><b>书籍名称:&nbsp;&nbsp;<small><?=$row->name?></small></b></h3>
+                        <h3><b>书籍名称:&nbsp;&nbsp;<small><?=$row->name?></small></b></h3>
                     </div>
                     <div>
                         <table class="table" style="margin:0">
-                            <tr>
-                                <td style="padding-top: 20px">
+                            <tr class="row">
+                                <td class="col-lg-8" style="padding-top: 20px">
                                     <h2>基本信息</h2>
                                     <h4>[<?=$row->type?>]&nbsp;&nbsp;
                                             <?=$row->price?>元</h4>
@@ -33,11 +33,12 @@
                                             <?=$row->old?></p>
                                     </div>
                                 </td>
-                                <td style="vertical-align: middle; padding-top: 20px">
-                                    <div class="ui labeled icon button huge black" id="buyNow">
+                                <?php $buyurl=base_url('index.php/go/buy/'.$row->id)?>
+                                <td class="col-lg-4" style="vertical-align: middle; padding-top: 20px">
+                                    <a class="ui labeled icon button huge black" id="buyNow" href="<?=$buyurl?>">
                                         <i class="cart icon"></i>
                                         购买
-                                    </div>
+                                    </a>
                                     <!-- <div class="ui vertical animated button huge">
                                       <div class="hidden content">购买</div>
                                       <div class="visible content">
@@ -64,7 +65,7 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-    
+
 })
 </script>
 <?php $this->load->view('footer');?>

@@ -1,9 +1,13 @@
 	<?php
-		$imgurl = base_url('/images/bk.jpg');
 		if (isset($row->imgurl)) {
 			$imgurl = $row->imgurl;
 		}
+		else {
+			// $imgurl = base_url('/images/bk.jpg');
+			$imgurl = "http://img5.douban.com/spic/s6974202.jpg";
+		}
 		$bkurl = base_url('/index.php/go/showbook/'.$row->id);
+		$buyurl = base_url('/index.php/go/buy/'.$row->id);
 	?>
 	<li class="media" style="margin:0">
 	    <a class="pull-left" href="<?=$bkurl?>">
@@ -12,7 +16,7 @@
 	    <div class="media-body">
 	    	<div style="float:right; margin:3px">
 	    		<span><h8><?=$row->price?>元&nbsp;&nbsp;</h8></span>
-	    		<a href="#" class="btn-sm btn-success">购买</a>
+	    		<a href="<?=$buyurl?>" class="ui button tiny black">购买</a>
 	    	</div>
 	      	<div>
 		      	<h4 class="media-heading">

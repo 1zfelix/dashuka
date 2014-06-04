@@ -18,9 +18,9 @@
     <script src="<?=base_url('js/headroom.min.js')?>"></script>
     <script src="<?=base_url('js/jQuery.headroom.min.js')?>"></script>
  -->
-    <link href="<?=base_url('css/semantic.min.css')?>" rel="stylesheet" type="text/css">
+ <!--    <link href="<?=base_url('css/semantic.min.css')?>" rel="stylesheet" type="text/css">
     <script src="<?=base_url('js/semantic.min.js')?>"></script>
-    
+   -->  
     <link href="<?=base_url('css/docs-new.css')?>" rel="stylesheet" type="text/css" />
     <!-- <link href="<?=base_url('css/animate.css')?>" rel="stylesheet" type="text/css" /> -->
     

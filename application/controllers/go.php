@@ -75,6 +75,33 @@ class GO extends CI_Controller {
    		$data['row']=$resp;
    		$this->load->view('buy_showbook',$data);
    	}
+
+   	public function buy($id)
+   	{
+   		$this->load->model('BookModel');
+   		$resp=$this->BookModel->findByProperty('id',$id);
+   		$data['row']=$resp;
+   		$this->load->view('buy_userinfo',$data);
+   	}
+
+   	public function pay()
+   	{
+   		$json=$this->input->post('jsoninfo');
+   		$jobid="a23rr";
+   		$data['jsoninfo']=$json;
+   		$data['jobid']=$jobid;
+   		$this->load->view('buy_pay',$data);
+   	}
+
+   	public function calluser($jobid)
+   	{
+   		$this->load->view('4');
+   	}
+
+   	public function payoffline($jobid)
+   	{
+   		$this->load->view('4');
+   	}
 }
 
 /* End of file go.php */

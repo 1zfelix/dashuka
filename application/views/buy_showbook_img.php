@@ -1,13 +1,13 @@
 <?php
-// $img=$row->images['large'];
-$img="http://img5.douban.com/lpic/s6974202.jpg";
+    // $img=$row->images['large'];
+    $img="http://img5.douban.com/lpic/s6974202.jpg";
 ?>
       <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
           <!-- Indicators -->
         <ol class="carousel-indicators">
           <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-          <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-          <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+          <!-- <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+          <li data-target="#carousel-example-generic" data-slide-to="2"></li> -->
         </ol>
 
         <!-- Wrapper for slides -->
@@ -15,12 +15,12 @@ $img="http://img5.douban.com/lpic/s6974202.jpg";
           <div class="item active">
             <center><img src="<?=$img?>" alt="..." style="min-height: 400px;min-width: 300px"></center>
           </div>
-          <div class="item">
+          <!-- <div class="item">
             <center><img src="<?=$img?>" alt="..." style="min-height: 400px;min-width: 300px"></center>
           </div>
           <div class="item">
             <center><img src="<?=$img?>" alt="..." style="min-height: 400px;min-width: 300px"></center>
-          </div>
+          </div> -->
         </div>
 
         <!-- Controls -->
