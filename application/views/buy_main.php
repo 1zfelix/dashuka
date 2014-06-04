@@ -1,4 +1,4 @@
-<?php $this->load->view('header');?>
+<?php $this->load->view('header_buy');?>
 
 <div class="container" style="padding: 40px">
 

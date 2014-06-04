@@ -2,9 +2,10 @@
     <div class="ui red demo sidebar vertical menu" style="padding-top:50px">
         <div class="header item">已添加的书</div>
         <div class="item SidebarEmptyInfo">请添加一本书...</div>
-        <div class="ui black fluid button" id="allBookSubmitBtn">Submit</div>
-        <form style="display:none" class="TotalBookInfo">
-            <input type="text" class="SidebarBookInfo" style="display:none"></input>
+        <form class="TotalBookInfo" action="<?=base_url('index.php\go\user')?>" method="post">
+            <input type="text" class="SidebarBookInfo" style="display:none" name="jsoninfo"></input>
+            <button class="ui black fluid button" id="allBookSubmitBtn" type="submit">Submit</button>
+            <button class="ui black fluid button" id="returnSubmitBtn" style="display:none" type="button">返回上一步</button>
         </form>
     </div>
 

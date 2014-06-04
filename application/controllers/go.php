@@ -52,6 +52,21 @@ class GO extends CI_Controller {
     	
     }
 
+   	public function user()
+   	{
+   		$json=$this->input->post('jsoninfo');
+   		$data['jsoninfo']=$json;
+   		$data['saletype']='user';
+   		$this->load->view('sale_userinfo_new',$data);
+   	}
+
+   	public function succ()
+   	{
+   		$json=$this->input->post('jsoninfo');
+   		$data['jsoninfo']=$json;
+   		$data['saletype']='user';
+   		$this->load->view('sale_userinfo_succ',$data);
+   	}
 }
 
 /* End of file go.php */

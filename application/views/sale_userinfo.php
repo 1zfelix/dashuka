@@ -1,16 +1,12 @@
+<?php $this->load->view('header');?>
+
+<?php $this->load->view('sale_sidebar');?>
+
+<div class="container">
+    <div class="row" style="margin: 0 50px; padding: 40px 0">
+<?php var_dump($jsoninfo);?>
 <form class="form-horizontal" action="<?=base_url('index.php/go/bookstorage')?>" method="post">
-    <div class="form-group">
-        <label for="school" class="col-lg-3 control-label">学院</label>
-        <div class="col-lg-8">
-            <input type="text" placeholder="学院" class="form-control" name="school" id="school">
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="owner" class="col-lg-3 control-label">卖主</label>
-        <div class="col-lg-8">
-            <input type="text" placeholder="可不填写真名" class="form-control" name="owner" id="owner">
-        </div>
-    </div>
+
     <div class="form-group">
         <label for="contact" class="col-lg-3 control-label">联系方式</label>
         <div class="col-lg-8">
@@ -40,10 +36,18 @@
                 <input type="text" placeholder="手机号/QQ/邮件等" class="form-control" name="contact" id="contact">
             </div>-->
     </div>
+
+
     <div class="form-group">
-        <label for="place" class="col-lg-3 control-label">交易地点</label>
+        <label for="type" class="col-lg-3 control-label">交易地点</label>
         <div class="col-lg-8">
-            <input type="text" placeholder="可填写最方便的地方" class="form-control" name="place" id="place">
+            <select class="form-control FormInputItem User" name="place" id="place">
+                <option value="none">请选择</option>
+                <option value="52">52斋</option>
+                <!-- <option value="dh">大活</option> -->
+            </select>
         </div>
     </div>
 </form>
+</div></div>
+<?php $this->load->view('footer_empty'); ?>

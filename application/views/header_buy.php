@@ -69,6 +69,14 @@
 
 
                 <nav class="navbar-collapse collapse" id="login">
+                    
+                    <form class="navbar-form navbar-left" role="search">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search">
+                        </div>
+                        <button type="submit" class="btn btn-default">Submit</button>
+                    </form>
+                    
                     <form action="<?=base_url('index.php/go/login')?>" class="navbar-form navbar-right" role="form" method="post">
                         <div class="form-group">
                             <input type="text" placeholder="用户名" class="form-control" name="username">
@@ -79,7 +87,9 @@
                         <button type="submit" class="btn btn-success">登录</button>
                         <button type="button" class="btn btn-warning">注册</button>
                     </form>
+                    
                 </nav>
+
 
             </div>
         </div>
