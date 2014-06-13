@@ -2,7 +2,7 @@
 <table class="table">
     <tr>
     <td style="vertical-align:bottom; padding:8px; border-top:0">
-        <img src="" id="qs_bkimg">
+        <center><img src="" id="qs_bkimg"></center>
     </td>
         
     <td style="vertical-align:bottom; padding:8px; border-top:0">
@@ -13,11 +13,11 @@
                   <div class="description" id="qs_bkname"></div>
                 </div>
             </div>
-            <div class="item">
+            <!-- <div class="item">
                 <div class="content">
                   <div class="description" id="qs_bkpub"></div>
                 </div>
-            </div>
+            </div> -->
             <div class="item">
                 <div class="content">
                   <div class="description" id="qs_bkauthor"></div>

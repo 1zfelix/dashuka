@@ -5,43 +5,37 @@ class BookModel extends CI_Model {
     {
         parent::__construct();
         $this->load->database();
+        $this->load->model('BaseDAO');
     }
     
-    public function addBook()
+    public function addBook($json)
     {
-        $info = array(
-               'name' => $_POST['name'] ,
-               'type'=> $_POST['type'] ,
-               'authors'=> $_POST['authors'] ,
-               'press' => $_POST['press'] ,
-               'school'=> $_POST['school'] ,
-               'owner'=> $_POST['owner'] ,
-               'contact'=> $_POST['contact'] ,
-               'place' => $_POST['place'] ,
-               'price' => $_POST['price'] ,
-               'pubdate' => $_POST['pubdate'] ,
-               'imgurl' => $_POST['imgurl']
-            );
-        // $code = 
-        $this->db->insert('book', $info);
-        $data['row']=$info;
-        $data['err']="";
-        return $data;
-    }
+        $json = json_decode($json);
 
-    public function readBook($page,$perSize)
-    {
-        $beg=($page-1)*$perSize;
-        $query=$this->db->query("SELECT * FROM book LIMIT $beg,$perSize");
-        return $query->result();
+        foreach ($json->bk as $key => $value) {
+            $authorArray = $value->org->author;
+            $authorStr = json_encode($value->org->author);
+            $info = array(
+               'bid' => $value->usr->bid,
+               'isbn' => $value->usr->isbn,
+               'name' => $value->org->title,
+               'authors'=> $authorStr,
+               'press' => $value->org->publisher,
+               'type'=> $value->usr->type,
+               'old' => $value->usr->old,
+               'pubdate' => $value->usr->pubdate,
+               'price' => $value->usr->price,
+               'school'=> '',
+               'contact'=> $json->us->contact,
+               'place' => $json->us->place,
+               'imgurl' => $value->org->image
+            );
+            $this->db->insert('book', $info);
+        }
     }
 
     public function countPage($perSize)
     {
-        /*
-        $query=$this->db->query("SELECT count(*) FROM book");
-        $ret=$query->result_array();
-        */
         $query=mysql_query("SELECT count(*) FROM book");
         $ret=mysql_fetch_array($query);
         $totalSize=intval($ret[0]);
@@ -49,14 +43,18 @@ class BookModel extends CI_Model {
         return $pageNum;
     }
 
-    public function findBookById($id)
+    public function findAll($page,$perSize)
     {
-        return findByProperty('id',$id);
+        return $this->BaseDAO->findAllWithLimit($page,$perSize);
     }
 
-    public function findByProperty($name,$val)
+    public function findByPropertyWithLimit($page,$perSize,$prop,$val)
     {
-        $query=$this->db->query("SELECT * FROM book WHERE ".$name."=".$val);
-        return $query->result();
+        return $this->BaseDAO->findByPropertyWithLimit($page,$perSize,$prop,$val);
+    }
+
+    public function findBookByBid($bid)
+    {
+        return $this->BaseDAO->findByProperty('bid',$bid);
     }
 }

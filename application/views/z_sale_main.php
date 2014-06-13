@@ -24,8 +24,8 @@
             <div class="form-group QuickStatus">
                 <div id="errorisbn" class="alert alert-warning" style="display:none">
                     获取失败,您可以:&nbsp;
-                    <button type="button" class="searchagain btn btn-success" style="text-align:center">重新搜索</button>&nbsp;&nbsp;
-                    <button type="button" class="addmanually btn btn-success" style="text-align:center">手动添加</button>
+                    <button type="button" class="searchagain btn btn-success btn-sm" style="text-align:center">重新搜索</button>&nbsp;&nbsp;
+                    <button type="button" class="addmanually btn btn-info btn-sm" style="text-align:center">手动添加</button>
                 </div>
                 <div id="succisbn" class="alert alert-success" style="display:none">
                     获取成功,请完善以下信息,或者您可以:&nbsp;
@@ -68,10 +68,11 @@
     
     <div class="BookInfo QuickFront row" style="margin: 0 50px; padding-bottom: 40px; display: none" id="formBtnSet">
         <p style="text-align:center">
-            <button type="button" class="QuickFront btn btn-success" id="quickFormSubmitBtn">提交</button>
-            <button type="button" class="manually btn btn-success" id="manuFormSubmitBtn" style="display:none">提交</button>
+            <button type="button" class="QuickFront btn btn-success" id="quickFormSubmitBtn">提交到书架</button>
+            <button type="button" class="manually btn btn-success" id="manuFormSubmitBtn" style="display:none">提交到书架</button>
             &nbsp;&nbsp;
             <button type="button" class="btn btn-default" id="editManuBtn">修改</button>
+            <button type="button" class="btn btn-default" id="cancelEditBtn" style="display:none">取消</button>
         </p>
     </div>
 
@@ -91,7 +92,7 @@ $(document).ready(function() {
         $('#quickFrontForm')[0].reset();
         $('#quickBackForm')[0].reset();
         $('#manuForm')[0].reset();
-        $('.QuickStatus').hide();
+        $('.QuickStatus .alert').hide();
         $('.QuickIsbn').show();
         $('.BookInfo').hide();
     });
@@ -103,8 +104,8 @@ $(document).ready(function() {
         $('#manuForm')[0].reset();
         
         $('.QuickIsbn').hide();
-        $('.QuickStatus').hide();
-        $('.QuickStatus#manuisbn').show();
+        $('.QuickStatus .alert').hide();
+        $('.QuickStatus #manuisbn').show();
         
         $('#formBtnSet').removeClass('QuickFront');
         $('#formBtnSet').addClass('manually');
@@ -123,7 +124,7 @@ $(document).ready(function() {
         }
 
         $('.QuickIsbn').hide();
-        $('.QuickStatus').hide();
+        $('.QuickStatus .alert').hide();
         $('#runisbn').show();
         
         ajaxProc2Halt = $.get('<?=base_url('index.php/ajax/isbn')?>' + '/' + $('#isbn').val(), function(data) {
@@ -170,17 +171,51 @@ $(document).ready(function() {
 
     $('#editManuBtn').click(function() {
         $(this).hide();
+        $('#cancelEditBtn').show();
         $('.QuickFront.QuickForm').hide();
         $('.QuickBack').show();
+        $('.QuickBack .FormInputItem').addClass('User');
     });
 
     $('#quickFormSubmitBtn').click(function() {
+        var flag=true;
+        $('.FormInputItem.User').each(function() {
+            if ($(this).val()=="" || $(this).val()=="none") {
+                $(this).parent().parent('.form-group').addClass('has-error');
+                flag=false;
+            }
+        });
+        if (!flag) {
+            return false;
+        }
         var singleBookInfo = formInput2Json('QuickBack');
         bookInfo2Sidebar(singleBookInfo,'QuickBack');
         submit2Sidebar();
     });
 
+    $('.FormInputItem.User').focus(function() {
+        $(this).parent().parent('.form-group').removeClass('has-error');
+    });
+
+    $('.FormInputItem.User').blur(function() {
+        if ($(this).val()=="" || $(this).val()=="none") {
+            $(this).parent().parent('.form-group').addClass('has-error');
+            flag=false;
+        }
+    });
+
+
     $('#manuFormSubmitBtn').click(function() {
+        var flag=true;
+        $('#manuForm .FormInputItem').each(function() {
+            if ($(this).val()=="" || $(this).val()=="none") {
+                $(this).parent().parent('.form-group').addClass('has-error');
+                flag=false;
+            }
+        });
+        if (!flag) {
+            return false;
+        }
         var singleBookInfo = formInput2Json('manually');
         bookInfo2Sidebar(singleBookInfo,'manually');
         submit2Sidebar();
@@ -258,6 +293,11 @@ function submit2Sidebar() {
     $('.BookInfo').hide();
 }
 
+// function checkVal() {
+//     if ($(.FormInputItem.User).val()=="" || $(.FormInputItem.User).val()=="none") {
+
+//     }
+// }
 </script>
 
 <?php $this->load->view('footer_empty'); ?>

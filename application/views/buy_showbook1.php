@@ -35,16 +35,18 @@
 
     </div>
     
+    <table style="padding: 10px; margin:0">
+    <tr class="row">
     
-    <div class="row" style="padding: 10px; margin:0">
-        <div class="col-lg-6">
+    <!-- <div class="row" style=""> -->
+        <td class="col-lg-6" style="vertical-align: middle">
             <?php 
                 $par['row']=$row;
                 $this->load->view('buy_showbook_img',$par);
             ?>
-        </div>
+        </td>
 
-        <div class="col-lg-6">
+        <td class="col-lg-6" style="vertical-align: middle">
             <div class="panel panel-default">
                 <div class="panel-body">
                     <div>
@@ -93,8 +95,9 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+        </td>
+    </tr>
+</table>
 </div>
 
 <script type="text/javascript">

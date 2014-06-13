@@ -1,60 +1,29 @@
 <?php $this->load->view('header');?>
-    <?php
-        $TypeMap = array(
-            'textbook' => '教材',
-            'magazine' => '杂志',
-            'journal' => '期刊',
-            'other' => '其他'
-        );
-        $OldMap = array(
-            '100' => '全新',
-            '99' => '99成新',
-            '90' => '9成新',
-            '50' => '其他'
-        );
-    ?>
+
+<?php $this->load->view('sale_sidebar');?>
+
 <div class="container">
-    <div class="row" style="margin: 0 50px; padding: 40px 0">
-        <?php 
-            $row=$row[0];
-            $imgurl = base_url('/images/bk.jpg');
-            if (isset($row->imgurl)) {
-                $imgurl = $row->imgurl;
-            }
-            $bkurl = base_url('/index.php/go/showbook/'.$row->bid);
-            $succurl = base_url('/index.php/go/pay/');
-
-            $authorArr = json_decode($row->authors);
-            $authorStr = '';
-            foreach ($authorArr as $key => $value) {
-                $authorStr = $authorStr. $value . '&nbsp;';
-            }
-
-            $type = $TypeMap[$row->type];
-            $old = $OldMap[$row->old];
-            $detail = false;
-            if (!isset($row->desc)){
-                $desc='描述加载中...';
-                $detail = true;
-            }
-        ?>
-       
-        <div class="row">
-            <label for="contact" class="col-lg-3 control-label" style="text-align: right">书籍信息</label>
-            <div class="col-lg-8">
-                <p>[<?=$type?>]&nbsp;&nbsp;<i><?=$row->name?></i>&nbsp;&nbsp;
-                <?=$authorStr?>&nbsp;著&nbsp;&nbsp;<?=$row->press?>&nbsp;&nbsp;版次:&nbsp;<?=$row->pubdate?>&nbsp;&nbsp;成色:&nbsp;<?=$old?></p>
-            </div>
+    <div class="row .Book" style="margin: 0 50px; padding-top: 40px; text-align: left">
+        <div class="alert alert-success">
+            请在左侧"已添加的书"中查看出售书籍信息
         </div>
+    </div>
+    <!-- <pre class="xdebug-var-dump" dir="ltr"><b>添加的书籍</b> <i>(size=4)</i>
+          0 <font color="#888a85">=&gt;</font> <small>string</small> <font color="#cc0000">'开放源代码的Web服务高级编程'</font> <i>(length=39)</i>
+    </pre> -->
+    <div class="row" style="margin: 0 50px; padding: 40px 0">
         
-        <hr>
-        
-        <form class="form-horizontal">
+        <form class="form-horizontal" action="<?=base_url('index.php/go/bookstorage')?>" method="post">
 
             <div class="form-group">
                 <label for="contact" class="col-lg-3 control-label">手机号</label>
                 <div class="col-lg-8">
+                    <!-- <div class="input-group">
+                        <span class="input-group-addon">手机号</span>
+                        <input type="text" class="form-control FormInputItem User" name="contact" id="contact">
+                    </div> -->
                     <input type="text" class="form-control FormInputItem User" name="contact" id="contact">
+
                 </div>
             </div>
 
@@ -74,7 +43,7 @@
 
     <div class="row" style="margin: 0 50px;">
         <center>
-            <form action="<?=$succurl?>" method="post" id="totalInfoForm">
+            <form action="<?=base_url('index.php/go/succ')?>" method="post" id="totalInfoForm">
                 <input type='hidden' id='YXM_here' />
                 <input type='hidden' id="jsoninfo" name="jsoninfo"/>
                 <br />
@@ -98,6 +67,95 @@
 </div>
 
 <script>
+
+function formInput2Json(data) {
+    var userAttrCnt = $('.FormInputItem').size();
+    var userInfo = '{';
+    var i = 1;
+    
+    $('.FormInputItem').each(function(){
+        userInfo += '"' + $(this).attr('name') + '":"' + $(this).val() + '"';
+        if (i == userAttrCnt) {
+            userInfo += '}';
+        }
+        else {
+            userInfo += ',';
+        }
+        i++;
+    })
+    var myEscapedJSONString = data.replace(/\\n/g, "");
+
+    userInfo = '{"bk":'+myEscapedJSONString+','+'"us":'+userInfo+'}';
+    return userInfo;
+}
+
+function formInput2Json_S(data) {
+    var userAttrCnt = $('.FormInputItem').size();
+    var userInfo = '{';
+    var i = 1;
+    
+    $('.FormInputItem').each(function(){
+        userInfo += '"' + $(this).attr('name') + '":"' + $(this).val() + '"';
+        if (i == userAttrCnt) {
+            userInfo += '}';
+        }
+        else {
+            userInfo += ',';
+        }
+        i++;
+    })
+
+    obj=JSON.parse(data);
+    var ts = '[';
+    for (var i = 0 ; i < obj.length ; i++) {
+        ts += JSON.stringify(obj[i]['usr']);
+        if ( i < obj.length - 1 ) {
+            ts += ',';
+        }
+        else {
+            ts += ']';
+        }
+    }
+    var myEscapedJSONString = ts.replace(/\\n/g, "");
+
+    userInfo = '{"bk":'+myEscapedJSONString+','+'"us":'+userInfo+'}';
+    return userInfo;
+}
+
+function initSidebar() {
+    $('#allBookSubmitBtn').hide();
+    var obj = <?=$jsoninfo?>;
+    obj = JSON.parse(obj);
+    if (obj == '') { 
+        return false;
+    }
+    $('.demo.sidebar .SidebarEmptyInfo').hide();
+
+    var menuitem = '<div class="item"></div>';
+    
+    for (var i=0;i<obj.length;i++) {
+        data = obj[i];
+        $('.demo.sidebar .header.item').after(
+            $('<div class="item"></div>').append(
+                $('<b></b>').append(
+                    data['org']['title']+" "+data['usr']['price']+"元"
+                ),
+                $('<div class="menu"></div>').append(
+                    $(menuitem).append(
+                        data['org']['author']
+                    ),
+                    $(menuitem).append(
+                        data['org']['publisher']
+                    ),
+                    $(menuitem).append(
+                        data['usr']['pubdate']
+                    )
+                )                
+            )
+        );
+    }
+}
+
 function checkInputEmpty()
 {
     var flag=true;
@@ -133,35 +191,20 @@ function checkInputFormat()
     return true;
 }
 
-function formInput2Json() {
-    var userAttrCnt = $('.FormInputItem').size();
-    var userInfo = '{"bid":' + "\"<?=$row->bid?>\",";
-    var i = 1;
-    
-    $('.FormInputItem').each(function(){
-        userInfo += '"' + $(this).attr('name') + '":"' + $(this).val() + '"';
-        if (i == userAttrCnt) {
-            userInfo += '}';
-        }
-        else {
-            userInfo += ',';
-        }
-        i++;
-    })
-    return userInfo;
-}
-
 $(window).load(function(){
     $('.YXM-bg').css('width',parseFloat($('.YXM-content').css('width'))+22);
     $('.YXM-box').css('width',parseFloat($('.YXM-bg').css('width'))+8);
     $('.input-wrap').css('height',$('.sub-wrap .sub-btn').css('height'));
-});
+})
 
 $(function(){
+
+    initSidebar();
+    
     $('#YXM_submit_btn').click(function(){
         if (!checkInputEmpty()) return false;
         if (!checkInputFormat()) return false;
-        var info=formInput2Json();
+        var info=formInput2Json(<?=$jsoninfo?>);
         $('#jsoninfo').val(info);
         $('#totalInfoForm').submit();
     })
@@ -177,5 +220,6 @@ $(function(){
         }
     });
 })
+
 </script>
 <?php $this->load->view('footer_empty'); ?>

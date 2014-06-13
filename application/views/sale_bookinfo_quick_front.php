@@ -1,17 +1,23 @@
 
 <form id="quickFrontForm" class="form-horizontal">
     
-    <div style="display:none">
-        <input type="text" class="qf_name FormInputItem" name="name">
-
-        <input type="text" class="qf_author FormInputItem" name="authors">
-
-        <input type="text" class="qf_pub FormInputItem" name="pubdate">
-
-        <input type="text" class="qf_press FormInputItem" name="press">
-
-        <input type="text" class="qf_imgurl FormInputItem" name="imgurl">
+    <input type="text" class="FormInputItem" style="display:none" name="bid" id="bid">
+    
+    <div class="form-group">
+        <label for="pubdate" class="col-lg-3 control-label">版次</label>
+        <div class="col-lg-8" id="staticPubDate">
+            <p class="form-control-static"><a href="javascript:editPubDateFunc()" style="float:right">修改</a></p>   
+        </div>
+        <div class="col-lg-8" style="display:none" id="activePubDate"> 
+            <div class="input-group">
+            <input type="text" class="form-control FormInputItem User" name="pubdate" id="pubdate">
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="button" id="confirmPubDate">确定</button>
+            </span>
+        </div>
+        </div>
     </div>
+  
 
     <div class="form-group">
         <label for="type" class="col-lg-3 control-label">类型</label>
@@ -44,5 +50,21 @@
             <input type="text" placeholder="价格" class="form-control FormInputItem User" name="price" id="price">
         </div>
     </div>
-    
+
 </form>
+
+<script type="text/javascript">
+$(function(){
+    $('#bid').val((new Date()).valueOf()+'<?=$this->session->userdata('session_id')?>');
+    $('#confirmPubDate').click(function(){
+        $('#staticPubDate p').html($('#pubdate').val()+'<a href="javascript:editPubDateFunc()" style="float:right">修改</a>');
+        $('#activePubDate').hide();
+        $('#staticPubDate').show();
+    });
+});
+function editPubDateFunc()
+{
+    $('#staticPubDate').hide();
+    $('#activePubDate').show();
+}
+</script>

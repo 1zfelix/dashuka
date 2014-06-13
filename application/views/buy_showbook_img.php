@@ -1,6 +1,7 @@
 <?php
-    // $img=$row->images['large'];
-    $img="http://img5.douban.com/lpic/s6974202.jpg";
+// var_dump($row);
+    $img=$row->imgurl;  
+    // $img="http://img5.douban.com/lpic/s6974202.jpg";
 ?>
       <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
           <!-- Indicators -->

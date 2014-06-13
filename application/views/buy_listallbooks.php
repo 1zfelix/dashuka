@@ -1,4 +1,18 @@
 	<?php
+		$TypeMap = array(
+			'textbook' => '教材',
+			'magazine' => '杂志',
+			'journal' => '期刊',
+			'other' => '其他'
+		);
+		$OldMap = array(
+			'100' => '全新',
+			'99' => '99成新',
+			'90' => '9成新',
+			'50' => '其他'
+		);
+	?>
+	<?php
 		if (isset($row->imgurl)) {
 			$imgurl = $row->imgurl;
 		}
@@ -6,8 +20,17 @@
 			// $imgurl = base_url('/images/bk.jpg');
 			$imgurl = "http://img5.douban.com/spic/s6974202.jpg";
 		}
-		$bkurl = base_url('/index.php/go/showbook/'.$row->id);
-		$buyurl = base_url('/index.php/go/buy/'.$row->id);
+		$bkurl = base_url('/index.php/go/showbook/'.$row->bid);
+		$buyurl = base_url('/index.php/go/buy/'.$row->bid);
+		
+		$authorArr = json_decode($row->authors);
+		$authorStr = '';
+		foreach ($authorArr as $key => $value) {
+			$authorStr = $authorStr. $value . '&nbsp;';
+		}
+
+		$type = $TypeMap[$row->type];
+		$old = $OldMap[$row->old];
 	?>
 	<li class="media" style="margin:0">
 	    <a class="pull-left" href="<?=$bkurl?>">
@@ -20,12 +43,12 @@
 	    	</div>
 	      	<div>
 		      	<h4 class="media-heading">
-		      		<a href="<?=$bkurl?>">[<?=$row->type?>]&nbsp;&nbsp;<i><?=$row->name?></i>&nbsp;&nbsp;</a>
+		      		<a href="<?=$bkurl?>">[<?=$type?>]&nbsp;&nbsp;<?=$row->name?>&nbsp;&nbsp;</a>
 		      	</h4>
 	      	</div>
       		<div class="list-group">
-	      		<p class="list-group-item-text"><?=$row->authors?>&nbsp;著&nbsp;&nbsp;<?=$row->press?>&nbsp;&nbsp;版次:&nbsp;<?=$row->pubdate?></p>
-	      		<p class="list-group-item-text">成色:&nbsp;<?=$row->old?></p>
+	      		<p class="list-group-item-text"><?=$authorStr?>&nbsp;<?=$row->press?>&nbsp;&nbsp;版次:&nbsp;<?=$row->pubdate?></p>
+	      		<p class="list-group-item-text">成色:&nbsp;<?=$old?></p>
       		</div>
 	    </div>
 	    <hr style="margin-top: -10px; margin-bottom: 2px">

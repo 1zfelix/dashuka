@@ -61,14 +61,20 @@
         <div id="header0" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <div class="container">
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#login" style="padding: 7.5px 10px; margin-top: 6px; margin-bottom: 6px;">
+                    <!-- <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#login" style="padding: 7.5px 10px; margin-top: 6px; margin-bottom: 6px;">
                         <span class="navbar-text">登录</span>
-                    </button>
+                    </button> -->
                     <a class="navbar-brand" href="<?=base_url('index.php')?>">5145</a>
                 </div>
 
-
-                <nav class="navbar-collapse collapse" id="login">
+                <?php
+                    if (isset($title) && $title=='index') {
+                ?>
+                    <a class="btn btn-info navbar-btn navbar-right" href="<?=base_url('index.php/go/service')?>">服务</a>
+                <?php
+                    }
+                ?>
+               <!--  <nav class="navbar-collapse collapse" id="login">
                     <form action="<?=base_url('index.php/go/login')?>" class="navbar-form navbar-right" role="form" method="post">
                         <div class="form-group">
                             <input type="text" placeholder="用户名" class="form-control" name="username">
@@ -80,6 +86,6 @@
                         <button type="button" class="btn btn-warning">注册</button>
                     </form>
                 </nav>
-
+ -->
             </div>
         </div>
