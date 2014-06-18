@@ -26,4 +26,22 @@ class BaseDAO extends CI_Model {
         $query=$this->db->query("SELECT * FROM book WHERE $prop like '%$val%' LIMIT $beg,$perSize");
         return $query->result();
     }
+
+    public function findMapping($db,$srcp,$val,$tarp)
+    {
+        $query=$this->db->query("SELECT $tarp FROM $db WHERE $srcp = $val");
+        return $query->result();
+    }
+
+    public function countAll($db,$prop,$val)
+    {
+        $query=$this->db->query("SELECT * FROM $db WHERE $prop = $val");
+        return count($query->result());
+    }
+
+    public function findAll($db,$prop,$val)
+    {
+        $query=$this->db->query("SELECT * FROM $db WHERE $prop = $val");
+        return $query->result();
+    }
 }

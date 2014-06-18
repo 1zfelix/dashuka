@@ -23,6 +23,47 @@ class GO extends CI_Controller {
 /*/////////////////////////////////////////////////////*/
 
 
+   public function logstatus()
+   {
+      $uid = $this->session->userdata('uid');
+      if ($uid) {
+         echo $uid;
+      }
+      else {
+         echo 'n';
+      }
+   }
+
+   public function login()
+   {
+      $usr = $this->input->post('usr');
+      $pwd = $this->input->post('pwd');
+      $this->load->model('UserModel');
+      $ret1 = $this->UserModel->findUser($usr);
+      if ($ret1) {
+         $ret2 = $this->UserModel->checkPwd($usr,$pwd);
+         if ($ret2) {
+            $this->session->set_userdata(
+               array(
+                  'uid'=>$usr,
+               )
+            );
+            $data[0]='y';
+            $data[1]=$usr;
+         }
+         else {
+            $data[0]='p';
+         }     
+      }
+      else {
+         $data[0]='u';
+      }
+      echo json_encode($data);
+   }
+
+/*/////////////////////////////////////////////////////*/
+
+
    public function ajaxsess()
    {
       $in = $this->input->post('newsess');
@@ -172,9 +213,19 @@ class GO extends CI_Controller {
 	public function pay()
 	{
 		$json=$this->input->post('jsoninfo');
+      $this->load->model('UserModel');
+      $usr=$this->session->userdata('uid');
+      $ui=$this->UserModel->getUserInfo($usr);
+      print_r($ui);
 		$jobid="a23rr";
 		$data['jsoninfo']=$json;
 		$data['jobid']=$jobid;
+      if ($ui!='') {
+         $data['acc']=(int)$ui->acc;
+      }
+      else {
+         $data['acc']='';
+      }
 		$this->load->view('buy_pay',$data);
 	}
 

@@ -39,6 +39,14 @@ body > #wrapper {
 th {
   font-family: "WenQuanYi Micro Hei","Microsoft YaHei",sans-serif;
 }
+
+.row.jumbotron.payment{
+  font-family: "Microsoft YaHei",sans-serif;
+  font-size: 16px;
+}
+.payment h3{
+  font-family: "Microsoft YaHei",sans-serif;
+}
 /*
 #main {
   padding-bottom: 120px;

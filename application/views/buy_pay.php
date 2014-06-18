@@ -1,4 +1,4 @@
-<?php $this->load->view('header_last');?>
+<?php $this->load->view('header');?>
 
 <div class="container" style="padding: 40px">
 	<?php
@@ -13,20 +13,84 @@
 	</div>
 	
 	<hr>
+
+	<div class="row">
+		<h2>您的账户余额:&nbsp;&nbsp;<small><?=$acc?>元</small></h2>
+		<br>
+			<!-- 
+		<?php var_dump($acc)?> -->
+	</div>
 	
+	<hr>
 	<div class="row">
 		<h2>请选择支付方式:</h2>
-		<div class="jumbotron">
-			  <h4>网上支付</h4>
-			  <p>...</p>
-			  <a id="payOn" class="btn btn-primary" role="button" data-toggle="modal" data-target="#payOnLineModal">点击以支付</a>
+		<br>
+	</div>
+	<div class="row jumbotron payment">
+		<div class="col-xs-4">
+			<a href="" target="_blank">
+				<img src="<?=base_url('images/taobao.gif')?>">
+			</a>
 		</div>
-	
-		<div class="jumbotron">
-			  <h4>取书点支付</h4>
-			  <p>...</p>
-			  <button class="btn btn-primary" data-toggle="modal" data-target="#payOffLineModal">点击以确认</button>
+		<div class="col-xs-8">
+			<div class="row">
+				<!-- <font color="#9BB831" size="3"><strong>官方淘宝店充值</strong></font> -->
+				<h3><font color="#9BB831"><strong>官方淘宝店充值</strong></font></h3>
+				<p>
+					<font color="#666666">只要您在官方淘宝店拍了商品，在此输入淘宝订单编号即可充值。</font>
+			        <br>
+			        <font color="#666666">例如，您需要充值36元，只要拍36件商品即可（单价1元）</font>
+				</p>
+				<br>
+			</div>
+			<div class="row">
+				<p>
+					<span class="style2">官方淘宝充值地址：</span><a href="http://item.taobao.com/item.htm?id=36276252806" target="_blank">http://item.taobao.com/item.htm?id=36276252806</a>
+					<br>
+					亲：拍完宝贝后，千万不要忘记在下面输入“淘宝购买商品的订单编号”，并且点击“淘宝订单编号支付”按钮！
+				</p>
+				<br>
+			</div>
+			<div class="row">
+				<h2>充值&nbsp;&nbsp;<small>请输入订单编号:</small></h2>
+				<input type="text" class="form-control" placeholder="淘宝商品订单编号">
+				<button class="btn btn-primary" data-toggle="modal" data-target="#payOnLineModal">点击以支付</button>
+				<br><br>
+			</div>
+			
+			<div class="row">
+				<p>
+				<small>购买书籍网上支付操作流程：
+		            <br>
+		            1，登录本网站。
+		            <br>
+		            2，选择您要购买的书籍，点击购买，根据单价计算充值金额，得到所需要拍的相应的商品数量。
+		            <br>
+		            3，在5145官方店铺拍下您需要购买的商品数量（单价1元），并且付款。
+		            <br>
+		            4，在充值页面，输入“淘宝购买商品的订单编号”，点击“淘宝订单支付”按钮。
+		            <br>
+		  			5，进入“提交订单”页面，提交成功之后，等待电话确认和通知。
+				</small>
+				</p>
+			</div>
 		</div>
+	</div>
+
+
+	<div class="row jumbotron payment">
+			<div class="col-xs-4">
+				
+			</div>
+			<div class="col-xs-8">
+				<div class="row">
+					<h3><font color="#9BB831"><strong>取书点支付</strong></font></h3>
+					<br>
+					<!-- <h4>取书点支付</h4> -->
+				  	<p>...</p>
+				  	<button class="btn btn-primary" data-toggle="modal" data-target="#payOffLineModal">点击以确认</button>
+				</div>
+			</div>
 	</div>
 
 	<div class="modal fade" id="payOffLineModal" tabindex="-1" role="dialog" aria-labelledby="payOffLineModalLabel" aria-hidden="true">

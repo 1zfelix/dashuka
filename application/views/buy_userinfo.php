@@ -95,9 +95,80 @@
         }
         </script>
     </div>
+
+
+    <!-- <a id="md" class="btn btn-primary" role="button" data-toggle="modal" data-target="#logInModal">点击以支付</a> -->
+    <!-- <button id="md" class="btn" data-toggle="modal" data-target="#logInModal" style="display:none"></button> -->
+    <div class="modal fade" id="logInModal" tabindex="-1" role="dialog" aria-labelledby="logInModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="logInModalLabel">注册并登录</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="ui two column middle aligned relaxed grid basic segment">
+                    
+                    <form class="ui form segment column" id="logInForm" method="post">
+
+                        <div class="field">
+                            <label>用户名</label>
+                            <div class="ui left labeled icon input">
+                                <input type="text" placeholder="用户名" name="usr">
+                                <i class="user icon"></i>
+                                <div class="ui corner label">
+                                    <i class="asterisk icon"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label>密码</label>
+                            <div class="ui left labeled icon input">
+                                <input type="password" name="pwd">
+                                <i class="lock icon"></i>
+                                <div class="ui corner label">
+                                    <i class="asterisk icon"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                              <div class="ui blue submit button" id="logIn">登录</div>
+                              <span style="display:none" id="errUsr" class="LogInError">&nbsp;用户名不存在</span>
+                              <span style="display:none" id="errPwd" class="LogInError">&nbsp;密码错误</span>
+                              <span style="display:none" id="empUsr" class="LogInError">&nbsp;请输入用户名</span>
+                              <span style="display:none" id="empPwd" class="LogInError">&nbsp;请输入密码</span>
+                        </div>
+
+                    </form>
+
+                    <div class="ui vertical divider">Or</div>
+                
+                    <div class="center aligned column">
+                        <div class="huge green ui labeled icon button">
+                            <i class="signup icon"></i>
+                            注册
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+<!--             <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary">登录</button>
+            </div> -->
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
 </div>
 
-<script>
+
+
+<script type="text/javascript">
 function checkInputEmpty()
 {
     var flag=true;
@@ -133,6 +204,33 @@ function checkInputFormat()
     return true;
 }
 
+
+function checkLoggedIn()
+{
+    var flag;
+    $.ajax({
+        url: '<?=base_url('index.php/go/logstatus')?>',
+        async: false,
+        success: function(data){
+            if (data == 'n') {
+                flag = false;
+            }
+            else {
+                flag = true;
+            }
+        }
+    });
+    if (!flag) {
+        $('#logInModal').modal({
+            show:true,
+            keyboard:false,
+            backdrop:'static'
+        });
+        return false;
+    }
+    return true;
+}
+
 function formInput2Json() {
     var userAttrCnt = $('.FormInputItem').size();
     var userInfo = '{"bid":' + "\"<?=$row->bid?>\",";
@@ -158,11 +256,13 @@ $(window).load(function(){
 });
 
 $(function(){
+    // $('#logInModal').modal();
     $('#YXM_submit_btn').click(function(){
         if (!checkInputEmpty()) return false;
         if (!checkInputFormat()) return false;
         var info=formInput2Json();
         $('#jsoninfo').val(info);
+        if (!checkLoggedIn()) return false;
         $('#totalInfoForm').submit();
     })
     
@@ -176,6 +276,37 @@ $(function(){
             flag=false;
         }
     });
+
+    $('#logIn').click(function(){
+        $('.LogInError').attr('style','display:none');
+        if ($("#logInForm input[name='usr']").val() == ''){
+            $('#empUsr').attr('style','display:inline');
+            return false;
+        }
+        if ($("#logInForm input[name='pwd']").val() == ''){
+            $('#empPwd').attr('style','display:inline');
+            return false;
+        }
+        $('#logInForm').ajaxSubmit({
+            url:'<?=base_url('index.php/go/login')?>',
+            success:function(data){
+                console.log(data);
+                data = JSON.parse(data);
+                if (data[0] == 'u'){
+                    $('#errUsr').attr('style','display:inline');
+                    return false;
+                }
+                else if (data[0] == 'p'){
+                    $('#errPwd').attr('style','display:inline');
+                    return false;
+                }
+                else if (data[0] == 'y'){
+                    $('#logInModal').modal('hide');
+                    $('#totalInfoForm').submit();
+                } 
+            }
+        })
+    })
 })
 </script>
 <?php $this->load->view('footer_empty'); ?>
