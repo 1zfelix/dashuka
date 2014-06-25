@@ -2,7 +2,7 @@
         $TypeMap = array(
             'textbook' => '教材',
             'magazine' => '杂志',
-            'journal' => '期刊',
+            'journal' => '英语',
             'other' => '其他'
         );
         $OldMap = array(
@@ -56,8 +56,10 @@ $(document).ready(function(){
     $(document).scroll(function(){
         if ( $('.mysidebar').height() + $('body').scrollTop() - 50 > $('.mymain').height() ) {
             $('.mysidebar').attr("style","position:relative");
+            var tt = $('.mymain').offset().top + $('.mymain').height() - $('.mysidebar').height();
+            if (tt<60) tt=60;
             $('.mysidebar').offset({
-                top : 50 + $('.mymain').offset().top + $('.mymain').height() - $('.mysidebar').height()
+                top : 50 + tt
             });
         }
         else{

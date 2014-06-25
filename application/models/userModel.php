@@ -20,7 +20,7 @@ class UserModel extends CI_Model {
     public function checkPwd($usr,$pwd)
     {
         $obj = $this->BaseDAO->findMapping('user','usr',$usr,'pwd');
-        $stdpwd = $obj[0]->pwd;
+        $stdpwd = $obj[0]['pwd'];
         if ($stdpwd == $pwd) {
             return true;
         }
@@ -34,4 +34,20 @@ class UserModel extends CI_Model {
         $obj = $this->BaseDAO->findAll('user','usr',$usr);
         return $obj[0];
     }
+
+    public function setAcc($usr,$ca)
+    {
+        $this->BaseDAO->setProperty('user','usr',$usr,'acc',$ca);
+    }
+
+    public function addUser($usr,$pwd)
+    {
+        $data = array(
+            'usr' => $usr,
+            'pwd' => $pwd,
+            'acc' => 0
+         );
+        $this->db->insert('user',$data);
+    }
+
 }

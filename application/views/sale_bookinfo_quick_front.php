@@ -26,7 +26,7 @@
                 <option value="none">请选择</option>
                 <option value="textbook">教材</option>
                 <option value="magazine">杂志</option>
-                <option value="journal">期刊</option>
+                <option value="journal">英语</option>
             </select>
         </div>
     </div>
@@ -37,9 +37,9 @@
             <select class="form-control FormInputItem User" name="old" id="old">
                 <option value="none">请选择</option>
                 <option value="100">全新</option>
-                <option value="99">99成新</option>
-                <option value="90">9成新</option>
-                <option value="50">其他</option>
+                <option value="99">有笔记基本全新</option>
+                <option value="90">封面破损</option>
+                <option value="50">缺页或其他</option>
             </select>
         </div>
     </div>

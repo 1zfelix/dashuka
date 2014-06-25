@@ -51,6 +51,11 @@
         <input type="text" name="jsonInfo" id="jsonInfo">
     </form>
 
+    <div class="row">
+        <center><h3>请输入图书背面右下角条形码上方的13位数字，即ISBN码，它可以确定一本图书的信息</h3>
+        <h3><small>请注意，输入过程中无需输入数字之间的"-"符号，请输入13位连续数字<small></h3></center>
+    </div>
+
 </div>
 <?php $this->load->view('sale_js');?>
 <script type='text/javascript'>

@@ -50,7 +50,7 @@
     </script>
  -->
     <title>
-        <?php if(isset($title)){ echo $title. "-";}?>Dashuka</title>
+        <?php if(isset($title)){ echo $title. "-";}?>格子</title>
 
 </head>
 
@@ -64,17 +64,17 @@
                     <!-- <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#login" style="padding: 7.5px 10px; margin-top: 6px; margin-bottom: 6px;">
                         <span class="navbar-text">登录</span>
                     </button> -->
-                    <a class="navbar-brand" href="<?=base_url('index.php')?>">5145</a>
+                    <a class="navbar-brand" href="<?=base_url('index.php')?>">格子书店</a>
                 </div>
 
 
                 <nav class="navbar-collapse collapse" id="login">
                     
-                    <form class="navbar-form navbar-right" role="search" method="get" action="<?=base_url('index.php/go/SBF/1/10/isbn')?>">
+                    <form id="sform" class="navbar-form navbar-right" role="search" method="post" action="<?=base_url('index.php/go/SBP/1/10/s/0')?>">
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Search" name="isbn">
+                            <input type="text" class="form-control" placeholder="书名, 作者, isbn" name="sval">
                         </div>
-                        <button type="submit" class="btn btn-info">SO!</button>
+                        <button type="button" class="btn btn-info" onclick="javascript:checkSinput();">SO!</button>
                     </form>
                     
                    <!--  <form action="<?=base_url('index.php/go/login')?>" class="navbar-form navbar-right" role="form" method="post">
@@ -89,6 +89,19 @@
                     </form> -->
                     
                 </nav>
+
+                <script type="text/javascript">
+                    function checkSinput()
+                    {
+                        if ($("input[name='sval']").val()=='') {
+                            alert('请输入搜索内容');
+                            return false;
+                        }
+                        else {
+                            $('#sform').submit();
+                        }
+                    }
+                </script>
 
 
             </div>

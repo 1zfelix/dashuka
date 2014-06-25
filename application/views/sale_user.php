@@ -33,7 +33,8 @@
                 <div class="col-lg-8">
                     <select class="form-control FormInputItem User" name="place" id="place">
                         <option value="none">请选择</option>
-                        <option value="52">52斋</option>
+                        <option value="52斋">52斋</option>
+                        <option value="25教学楼下">25教学楼下</option>
                         <!-- <option value="dh">大活</option> -->
                     </select>
                 </div>

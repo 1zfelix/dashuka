@@ -3,14 +3,14 @@
         $TypeMap = array(
             'textbook' => '教材',
             'magazine' => '杂志',
-            'journal' => '期刊',
+            'journal' => '英语',
             'other' => '其他'
         );
         $OldMap = array(
             '100' => '全新',
-            '99' => '99成新',
-            '90' => '9成新',
-            '50' => '其他'
+            '99' => '有笔记基本全新',
+            '90' => '封面破损',
+            '50' => '缺页或其他'
         );
     ?>
 <div class="container">
@@ -64,7 +64,8 @@
                 <div class="col-lg-8">
                     <select class="form-control FormInputItem User" name="place" id="place">
                         <option value="none">请选择</option>
-                        <option value="52">52斋</option>
+                        <option value="52斋">52斋</option>
+                        <option value="25教学楼下">25教学楼下</option>
                         <!-- <option value="dh">大活</option> -->
                     </select>
                 </div>
@@ -147,10 +148,10 @@
                     <div class="ui vertical divider">Or</div>
                 
                     <div class="center aligned column">
-                        <div class="huge green ui labeled icon button">
+                        <a class="huge green ui labeled icon button" href="<?=base_url('index.php/go/goToRegPage')?>">
                             <i class="signup icon"></i>
                             注册
-                        </div>
+                        </a>
                     </div>
 
                 </div>
@@ -204,7 +205,6 @@ function checkInputFormat()
     return true;
 }
 
-
 function checkLoggedIn()
 {
     var flag;
@@ -231,7 +231,34 @@ function checkLoggedIn()
     return true;
 }
 
-function formInput2Json() {
+function checkLast() 
+{
+    var flag = false;
+    $.ajax({
+        url:"<?=base_url('index.php/go/checkSold/')?>"+"<?=$row->bid?>",
+        async: false,
+        success:function(data){
+            if (data == 's'){
+                flag = true;
+            }
+            else {
+                alert("这本书刚被出售");
+                // history.go(-1);
+                location.href='<?=base_url('index.php/go/SBP/1/10/all/0')?>';
+                flag= false;
+            } 
+        }
+    });
+    if (flag) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+function formInput2Json() 
+{
     var userAttrCnt = $('.FormInputItem').size();
     var userInfo = '{"bid":' + "\"<?=$row->bid?>\",";
     var i = 1;
@@ -256,13 +283,15 @@ $(window).load(function(){
 });
 
 $(function(){
-    // $('#logInModal').modal();
+
     $('#YXM_submit_btn').click(function(){
         if (!checkInputEmpty()) return false;
         if (!checkInputFormat()) return false;
         var info=formInput2Json();
+        var bid='<?=$row->bid?>';
         $('#jsoninfo').val(info);
         if (!checkLoggedIn()) return false;
+        if (!checkLast()) return false;
         $('#totalInfoForm').submit();
     })
     
@@ -287,11 +316,13 @@ $(function(){
             $('#empPwd').attr('style','display:inline');
             return false;
         }
+        $('#logInForm').addClass('loading');
         $('#logInForm').ajaxSubmit({
             url:'<?=base_url('index.php/go/login')?>',
             success:function(data){
                 console.log(data);
                 data = JSON.parse(data);
+                $('#logInForm').removeClass('loading');
                 if (data[0] == 'u'){
                     $('#errUsr').attr('style','display:inline');
                     return false;
@@ -302,6 +333,7 @@ $(function(){
                 }
                 else if (data[0] == 'y'){
                     $('#logInModal').modal('hide');
+                    if (!checkLast()) return false;
                     $('#totalInfoForm').submit();
                 } 
             }

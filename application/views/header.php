@@ -52,9 +52,14 @@
     });
     </script>
  -->
+ <?php error_reporting(E_ERROR | E_WARNING | E_PARSE);?>
     <title>
-        <?php if(isset($title)){ echo $title. "-";}?>Dashuka</title>
-
+        <?php if(isset($title)){ echo $title. "-";}?>格子</title>
+        <?php
+            $burl = '';
+            global $burl;
+            $burl = $_SERVER['HTTP_REFERER'];
+        ?>
 </head>
 
 <body>
@@ -67,7 +72,7 @@
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#login" style="padding: 7.5px 10px; margin-top: 6px; margin-bottom: 6px;">
                         <span class="navbar-text">登录</span>
                     </button>
-                    <a class="navbar-brand" href="<?=base_url('index.php')?>">5145</a>
+                    <a class="navbar-brand" href="<?=base_url('index.php')?>">格子书店</a>
                 </div>
 <!-- 
                 <?php
@@ -77,7 +82,7 @@
                 <?php
                     }
                 ?> -->
-                <nav class="navbar-collapse collapse" id="navLogIn">
+                <nav id="navLogIn" class="navbar-collapse collapse">
                     <form id="hdLogInForm" class="navbar-form navbar-right" role="form" method="post">
                         <div class="form-group">
                             <input type="text" placeholder="用户名" class="form-control" name="usr">
@@ -86,13 +91,22 @@
                             <input type="password" placeholder="密码" class="form-control" name="pwd">
                         </div>
                         <button type="button" class="btn btn-success" id="hdLogIn">登录</button>
-                        <button type="button" class="btn btn-warning">注册</button>
+                        <a type="button" class="btn btn-warning" id="hdReg" href="<?=base_url('index.php/go/goToRegPage')?>">注册</a>
                     </form>
+
+                    <ul id="hdLogged" class="nav navbar-nav navbar-right" style="display:none">
+                        <li>
+                            <p class='navbar-text' id='hdLogWc'>
+                                
+                                <!-- <small><a href='#' class='hdLogOut'>注销</a></small> -->
+                            </p>
+                        </li>
+                    </ul>
+
                 </nav>
 
             </div>
         </div>
-
 
 <script type="text/javascript">
 function headerCheckLoggedIn()
@@ -119,8 +133,26 @@ function headerCheckLoggedIn()
 }
 function loggedInHeader(usr)
 {
-    $("#navLogIn").html('<p class="navbar-right navbar-text">hello, '+usr+'</p>');
+    $('#hdLogInForm').hide();
+    $('#hdLogWc').html("hello, "+usr+"&nbsp;<small><a class='hdLogOut' onclick='javascript:logOutClick();'>注销</a></small>");
+    if (<?=$last?>==1) $('.hdLogOut').hide();
+    $('#hdLogged').show();
+    // $("#navLogIn").html("<ul class='nav navbar-nav navbar-right'><li><p class='navbar-text'>hello, "+usr+"&nbsp;<small><a href='#' id='hdLogOut'>注销</a><small></p></li></ul>");
+    // $("#navLogIn").html('<p class="navbar-right navbar-text">hello, '+usr+'&nbsp;&nbsp;<small><a id="hdLogOut"></a></small></p>');
 }
+function logOutClick()
+{
+    $.ajax({
+        url:'<?=base_url('index.php/go/logout')?>',
+        success:function(data){
+            alert('确定注销?');
+            $('#hdLogged').hide();
+            $('#hdLogWc').html("");
+            $('#hdLogInForm').show();
+        }
+    });
+}
+
 $(function(){
     headerCheckLoggedIn();
     $('#hdLogIn').click(function(){
@@ -148,9 +180,13 @@ $(function(){
                 }
                 else if (data[0] == 'y'){
                     loggedInHeader(data[1]);
-                } 
+                }
+                else if (data[0] == 'a'){
+                    $("#admin").show();
+                }
             }
         });
     });
+
 });
 </script>
